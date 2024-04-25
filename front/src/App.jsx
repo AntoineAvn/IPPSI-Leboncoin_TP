@@ -8,6 +8,7 @@ import Page404 from "./pages/page404/Page404.jsx";
 import NavBar from "./components/navbar/navbar.jsx";
 import Home from "./pages/home/Home";
 import Account from "./pages/compte/account.jsx";
+import PublicOnlyRoute from "./utils/PublicOnlyRoute";
 import "./App.css";
 
 function App() {
@@ -16,14 +17,12 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="*" element={<Page404 />} />
+          <Route path="/" element={<PublicOnlyRoute element={<Login />} />} />
+          <Route path="/register" element={<PublicOnlyRoute element={<Register />} />} />
           <Route path="/home" element={<ProtectedRoute element={<Home />} />} />
-          <Route
-            path="/account"
-            element={<ProtectedRoute element={<Account />} />}
+          <Route path="/account" element={<ProtectedRoute element={<Account />} />}
           />
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
