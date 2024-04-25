@@ -1,20 +1,18 @@
+import { useState } from 'react';
 
-import React, { useState } from 'react';
-
-const LoginPage = () => {
+const RegisterPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Envoyer les données de connexion au serveur pour authentification
+    // Envoyer les données d'inscription au serveur pour création de compte
     // (à implémenter)
-
   };
 
   return (
     <div>
-      <h2>Connexion</h2>
+      <h2>Inscription</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -28,11 +26,10 @@ const LoginPage = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Se connecter</button>
+        <button type="submit">S&apos;inscrire</button>
       </form>
-      <p>Vous n'avez pas de compte ? <a href="/signup">Inscrivez-vous</a></p>
     </div>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
