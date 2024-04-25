@@ -87,10 +87,10 @@ export default class UserController {
 
         try {
             if(!right){
-                await this.updateUserFields(userId, body, res)
+                await UserController.updateUserFields(userId, body, res)
             }
             else{
-                await this.updateUserFields(id, body, res)
+                await UserController.updateUserFields(id, body, res)
             }
         } catch(error: unknown){
             res.status(500).json({message: `Error: ${getErrorMessage(error)}`})

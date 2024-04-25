@@ -7,7 +7,7 @@ const router  = express.Router()
 router.get('/announces', AnnonceController.getAllAnnonce)
 router.get('/announce', AnnonceController.getAnnonce)
 router.post('/announce', ValidateToken.Validation, AnnonceController.createAnnounce) 
-router.patch('/announce/:id', ValidateToken.Validation, AnnonceController.updateAnnounces)
+router.patch('/announce/:id?', ValidateToken.Validation, AnnonceController.updateAnnounces)
 router.delete('/announce', ValidateToken.Validation, AnnonceController.deleteAnnounce)
 
 export default router

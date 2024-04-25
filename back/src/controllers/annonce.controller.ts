@@ -95,7 +95,7 @@ export default class AnnonceController {
             const user = await User.findById(userId)
             const right = user?.isAdmin
 
-            const isTheOwner = this.isOwnByUser(userId, annonceId)
+            const isTheOwner = AnnonceController.isOwnByUser(userId, annonceId)
 
             if(!isTheOwner && !right){
                 return res.status(401).json({message: "You can't modify this announce"})
@@ -104,7 +104,7 @@ export default class AnnonceController {
                 return res.status(404).json({message: "Announce not found"})
             }
 
-            await this.updateAnnouncesFields(annonceId, body, res)
+            await AnnonceController.updateAnnouncesFields(annonceId, body, res)
 
         } catch(error: unknown){
             res.status(400).json({ message: `Failed to update the announce: ${getErrorMessage(error)}`});
@@ -120,7 +120,7 @@ export default class AnnonceController {
             const user = await User.findById(userId)
             const right = user?.isAdmin
 
-            const isTheOwner = this.isOwnByUser(userId, annonceId)
+            const isTheOwner = AnnonceController.isOwnByUser(userId, annonceId)
 
             if(!isTheOwner && !right){
                 return res.status(401).json({message: "You can't modify this announce"})
