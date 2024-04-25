@@ -3,6 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authRouter from "./routes/auth"
+import userRouter from "./routes/user"
 
 dotenv.config();
 
@@ -22,11 +23,12 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api',
-    authRouter
+  authRouter,
+  userRouter
 );
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server');
+  res.send('Hello world');
 });
 
 app.listen(port, () => {
