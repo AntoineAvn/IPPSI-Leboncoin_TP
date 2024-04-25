@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import authRouter from "./routes/auth"
 
 dotenv.config();
 
@@ -20,7 +21,9 @@ db.once('open', () => {
 app.use(cors());
 app.use(express.json());
 
-//app.use('/api');
+app.use('/api',
+    authRouter
+);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Express + TypeScript Server');
