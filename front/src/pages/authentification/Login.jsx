@@ -1,5 +1,5 @@
-
-import { useState } from 'react';
+import React, { useState } from 'react';
+import './Login.css'; // Importer le fichier CSS
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -13,7 +13,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
+    <div className="login-container"> {/* Ajouter une classe pour appliquer les styles */}
       <h2>Connexion</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -26,11 +26,12 @@ const LoginPage = () => {
           type="password"
           placeholder="Mot de passe"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)} 
         />
-        <button type="submit">Se connecter</button>
+        <button type="submit">Se connecter</button> {/* Bouton de connexion */}
       </form>
-      <p>Vous n&apos;avez pas de compte ? <a href="/signup">Inscrivez-vous</a></p>
+      <p>Vous n&apos;avez pas de compte ? </p>
+      <a href="/register">Inscrivez-vous</a> {/* Lien vers la page d'inscription */}
     </div>
   );
 };

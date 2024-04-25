@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Importez Link depuis react-router-dom
+import './Login.css'; 
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
@@ -11,7 +13,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div>
+    <div className="login-container"> {/* Appliquez la classe commune */}
       <h2>Inscription</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -26,8 +28,10 @@ const RegisterPage = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">S&apos;inscrire</button>
+        <button type="submit">S'inscrire</button>
       </form>
+      <p>Vous n&apos;avez déjà un compte ? </p>
+      <Link to="/">Connectez vous !</Link> {/* Retour a la page de Login */}
     </div>
   );
 };
