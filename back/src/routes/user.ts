@@ -4,7 +4,7 @@ import UserController from "../controllers/user.controller";
 
 const router = express.Router()
 
-router.get('/user', UserController.getAllUser)
+router.get('/users', UserController.getAllUser)
 router.get('/user/:id', ValidateToken.Validation, UserController.getUser)
 router.patch('/user/:id', ValidateToken.Validation, UserController.updateUser)
 router.delete('/user/:id', ValidateToken.Validation, UserController.deleteUser)

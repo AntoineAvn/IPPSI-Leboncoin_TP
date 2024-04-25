@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authRouter from "./routes/auth"
 import userRouter from "./routes/user"
+import announceRouter from "./routes/annonce"
 
 dotenv.config();
 
@@ -24,7 +25,8 @@ app.use(express.json());
 
 app.use('/api',
   authRouter,
-  userRouter
+  userRouter,
+  announceRouter
 );
 
 app.get('/', (req: Request, res: Response) => {

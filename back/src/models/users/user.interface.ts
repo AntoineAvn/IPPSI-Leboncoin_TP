@@ -7,7 +7,7 @@ export default interface IUser extends Document {
     username: string,
     createdAt: Date,
     updatedAt: Date,
-    annonces: Types.ObjectId[] | number[],
+    annonces: Types.ObjectId[],
     isAdmin: boolean
 }
 
