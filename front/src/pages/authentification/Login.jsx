@@ -1,8 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import './Login.css'; // Importer le fichier CSS
 import ErrorComponent from '../../components/error/ErrorComponent';
+import { AuthContext } from '../../utils/AuthContext';
+import { Navigate } from 'react-router-dom';
 
 const LoginPage = () => {
+  const { setIsAuthenticated } = useContext(AuthContext);
+  const [redirectToHome, setRedirectToHome] = useState(false);
   const [email, setMail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -30,7 +34,10 @@ const LoginPage = () => {
       .then((data) => {
         // Si le statut était 200, on redirige vers la page de connexion
         console.log(data);
-        window.location.replace('/home');
+
+        localStorage.setItem('authToken', data.token);
+        setIsAuthenticated(true); // Met à jour le contexte d'authentification
+        setRedirectToHome(true); 
       })
       .catch((err) => {
         // Gérer les erreurs ou les statuts autres que 201
@@ -39,6 +46,10 @@ const LoginPage = () => {
       });
 
   };
+
+  if (redirectToHome) {
+    return <Navigate to="/home" />; // Redirige sans recharger la page
+  }
 
   return (
     <div className="login-container"> {/* Ajouter une classe pour appliquer les styles */}
