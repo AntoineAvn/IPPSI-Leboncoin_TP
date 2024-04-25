@@ -1,16 +1,45 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom'; // Importez Link depuis react-router-dom
 import './Login.css'; 
+import ErrorComponent from '../../components/error/ErrorComponent';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setMail] = useState('');
+  const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Envoyer les données d'inscription au serveur pour création de compte
-    // (à implémenter)
+  
+    fetch('http://localhost:3001/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, email, password }),
+    })
+      .then((res) => {
+        // On vérifie si le statut de la réponse HTTP est 201 (Created)
+        if (res.status === 201) {
+          return res.json();
+        } else {
+          // Si le statut n'est pas 201, on renvoie une erreur
+          return Promise.reject(`Error: ${res.status} - ${res.statusText}`);
+        }
+      })
+      .then((data) => {
+        // Si le statut était 201, on redirige vers la page de connexion
+        console.log(data);
+        window.location.replace('/');
+      })
+      .catch((err) => {
+        // Gérer les erreurs ou les statuts autres que 201
+        setError('Erreur lors de l\'inscription'); 
+        console.error(err);
+      });
   };
+  
 
   return (
     <div className="login-container"> {/* Appliquez la classe commune */}
@@ -23,6 +52,12 @@ const RegisterPage = () => {
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
+          type="email"
+          placeholder="Adresse email"
+          value={email}
+          onChange={(e) => setMail(e.target.value)}
+        />
+        <input
           type="password"
           placeholder="Mot de passe"
           value={password}
@@ -30,6 +65,8 @@ const RegisterPage = () => {
         />
         <button type="submit">S&apos;inscrire</button>
       </form>
+        {/* Afficher le composant d'erreur s'il y a une erreur */}
+        <ErrorComponent errorMessage={error} />
       <p>Vous avez déjà un compte ? </p>
       <Link to="/">Connectez vous !</Link> {/* Retour a la page de Login */}
     </div>

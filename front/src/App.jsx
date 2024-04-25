@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './pages/authentification/Login.jsx'
 import Register from './pages/authentification/Register.jsx'
 import Page404 from "./pages/page404/Page404.jsx";
-import NavBar from "./components/navbar/navbar";
+import NavBar from "./components/navbar/Navbar.jsx";
 import Home from "./pages/home/Home";
 import Account from "./pages/compte/account.jsx";
 import "./App.css";
