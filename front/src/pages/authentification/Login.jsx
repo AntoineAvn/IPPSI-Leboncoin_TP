@@ -35,7 +35,7 @@ const LoginPage = () => {
         // Si le statut était 200, on redirige vers la page de connexion
         console.log(data);
 
-        localStorage.setItem('authToken', data.token);
+        localStorage.setItem('authToken', data.value.token);
         setIsAuthenticated(true); // Met à jour le contexte d'authentification
         setRedirectToHome(true); 
       })
