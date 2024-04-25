@@ -7,7 +7,8 @@ import Register from "./pages/authentification/Register.jsx";
 import Page404 from "./pages/page404/Page404.jsx";
 import NavBar from "./components/navbar/navbar.jsx";
 import Home from "./pages/home/Home";
-import Account from "./pages/compte/account.jsx";
+import Announce from "./pages/announce/Announce.jsx";
+import Account from "./pages/account/Account.jsx";
 import PublicOnlyRoute from "./utils/PublicOnlyRoute";
 import "./App.css";
 
@@ -20,8 +21,8 @@ function App() {
           <Route path="/" element={<PublicOnlyRoute element={<Login />} />} />
           <Route path="/register" element={<PublicOnlyRoute element={<Register />} />} />
           <Route path="/home" element={<ProtectedRoute element={<Home />} />} />
-          <Route path="/account" element={<ProtectedRoute element={<Account />} />}
-          />
+          <Route path="/announce/:id" element={<ProtectedRoute element={<Announce />} />} />
+          <Route path="/account" element={<ProtectedRoute element={<Account />} />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
