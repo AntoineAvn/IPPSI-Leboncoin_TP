@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './Login.css'; // Importer le fichier CSS
 
 const LoginPage = () => {
