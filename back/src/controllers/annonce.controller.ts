@@ -77,7 +77,8 @@ export default class AnnonceController {
                 seller,
                 createdAt: new Date()
             });
-
+            const user = await User.findById(userId)
+            user?.annonces.push(newAnnounce.id)
             const savedAnnounce = await newAnnounce.save();
             res.status(201).json({ message: "Announcement created", value: { announce: savedAnnounce } });
         } catch(error: unknown) {
@@ -132,9 +133,14 @@ export default class AnnonceController {
 
             const { id } = req.params
             const removeAnnonce = await Annonces.findByIdAndDelete(id)
+
             if(!removeAnnonce){
                 return res.status(404).json({message: "Announce not found"})
             }
+
+            await User.findByIdAndUpdate(userId, {
+                $pull: { annonces: annonceId } 
+            });
 
             res.status(200).json({message: "Announce deleted"})
         } catch(error: unknown){
