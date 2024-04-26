@@ -9,7 +9,7 @@ export default class CategoriesController {
             const categories = await Categories.find();
             res.status(200).json({ value: { categories } });
         } catch(error: unknown){
-            res.status(400).json({ message: `Error: ${getErrorMessage(error)}` });
+            res.status(500).json({ message: `Error: ${getErrorMessage(error)}` });
         }
     }
 
@@ -22,7 +22,7 @@ export default class CategoriesController {
             }
             res.status(200).json({ value: { category } });
         } catch(error: unknown){
-            res.status(400).json({ message: `Error: ${getErrorMessage(error)}` });
+            res.status(500).json({ message: `Error: ${getErrorMessage(error)}` });
         }
     }
 
@@ -36,7 +36,7 @@ export default class CategoriesController {
             const savedCategory = await newCategory.save();
             res.status(201).json({ message: "Category created", value: { category: savedCategory } });
         } catch(error: unknown) {
-            res.status(400).json({ message: `Failed to create the category: ${getErrorMessage(error)}` });
+            res.status(500).json({ message: `Failed to create the category: ${getErrorMessage(error)}` });
         }
     }
 
@@ -50,7 +50,7 @@ export default class CategoriesController {
             }
             res.status(200).json({ message: "Category updated", value: { category: updatedCategory } });
         } catch(error: unknown){
-            res.status(400).json({ message: `Failed to update the category: ${getErrorMessage(error)}` });
+            res.status(500).json({ message: `Failed to update the category: ${getErrorMessage(error)}` });
         }
     }
 
@@ -63,7 +63,7 @@ export default class CategoriesController {
             }
             res.status(200).json({ message: "Category deleted" });
         } catch(error: unknown){
-            res.status(400).json({ message: `Failed to delete the category: ${getErrorMessage(error)}` });
+            res.status(500).json({ message: `Failed to delete the category: ${getErrorMessage(error)}` });
         }
     }
 }

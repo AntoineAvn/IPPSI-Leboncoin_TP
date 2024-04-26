@@ -129,7 +129,7 @@ export default class AnnonceController {
             const isTheOwner = AnnonceController.isOwnByUser(userId, annonceId)
 
             if(!isTheOwner && !right){
-                return res.status(401).json({message: "You can't modify this announce"})
+                return res.status(403).json({message: "You can't modify this announce"})
             }
 
             if(isTheOwner === null){
