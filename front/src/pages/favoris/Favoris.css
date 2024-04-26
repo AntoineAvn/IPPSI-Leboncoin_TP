@@ -1,0 +1,19 @@
+.favorite-announces-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.favorite-announce-item{
+    margin: 10px;
+    padding: 30px;
+    width: 300px;
+    height: 300px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
