@@ -7,7 +7,7 @@ const userSchema = new Schema({
     username: { type: String, default: generateUsername() },
     createdAt: { type: Date, default: new Date() },
     updatedAt: { type: Date },
-    annonces: { type: Array<Types.ObjectId>, ref: 'Annonces' },
+    annonces: { type: Array<Types.ObjectId>, ref: 'Annonces', default: [] },
     isAdmin: { type: Boolean, default: false, require: true }
 })
 

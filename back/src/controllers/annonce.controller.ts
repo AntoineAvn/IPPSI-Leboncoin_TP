@@ -19,7 +19,7 @@ export default class AnnonceController {
             res.status(200).json({ message: "Announce updated",value: {updatedAnnonce}})
 
         } catch (error: unknown){
-              res.status(400).json({ message: `Failed to update the announce: ${getErrorMessage(error)}`});
+              res.status(500).json({ message: `Failed to update the announce: ${getErrorMessage(error)}`});
         }
     }
 
@@ -44,20 +44,20 @@ export default class AnnonceController {
             }
             res.status(200).json({value:{annonces}})
         } catch(error: unknown){
-            res.status(400).json({ message: `Error: ${getErrorMessage(error)}`})
+            res.status(500).json({ message: `Error: ${getErrorMessage(error)}`})
         }
     }
 
     static async getAnnonce(req: Request, res: Response){
         const {id:annonceId} = req.params
         try {
-            const annonce = await Annonces.findById(annonceId).populate('categories')
+            const annonce = await Annonces.findById(annonceId).populate('Categories')
             if(!annonce){
                 return res.status(404).json({message: "Announce not found"})
             }
             res.status(200).json({value:{annonce}})
         } catch(error: unknown){
-            res.status(400).json({ message: `Error: ${getErrorMessage(error)}`})
+            res.status(500).json({ message: `Error: ${getErrorMessage(error)}`})
         }
     }
 
@@ -87,7 +87,7 @@ export default class AnnonceController {
             await user.save()
             res.status(201).json({ message: "Announcement created", value: { announce: savedAnnounce } });
         } catch(error: unknown) {
-            res.status(400).json({ message: `Failed to create the announcement: ${getErrorMessage(error)}` });
+            res.status(500).json({ message: `Failed to create the announcement: ${getErrorMessage(error)}` });
         }
     }
 
@@ -113,7 +113,7 @@ export default class AnnonceController {
             await AnnonceController.updateAnnouncesFields(annonceId, body, res)
 
         } catch(error: unknown){
-            res.status(400).json({ message: `Failed to update the announce: ${getErrorMessage(error)}`});
+            res.status(500).json({ message: `Failed to update the announce: ${getErrorMessage(error)}`});
         }
     }
 

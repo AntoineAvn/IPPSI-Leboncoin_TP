@@ -7,6 +7,7 @@ import dotenv from 'dotenv'
 import authRouter from "./routes/auth"
 import userRouter from "./routes/user"
 import announceRouter from "./routes/annonce"
+import catergoriesRouter from "./routes/categories"
 import MessageController from './controllers/message.controller'
 
 
@@ -33,6 +34,7 @@ app.use('/api',
   authRouter,
   userRouter,
   announceRouter,
+  catergoriesRouter
 )
 
 

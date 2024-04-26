@@ -10,3 +10,5 @@ router.get('/categorie/:id',  ValidateToken.Validation, VerifyAdmin.isAdmin, Cat
 router.post('/categorie',  ValidateToken.Validation, VerifyAdmin.isAdmin, CategoriesController.createCategory)
 router.patch('/categorie/:id',  ValidateToken.Validation, VerifyAdmin.isAdmin, CategoriesController.updateCategory)
 router.delete('/categorie',  ValidateToken.Validation, VerifyAdmin.isAdmin, CategoriesController.deleteCategory)
+
+export default router

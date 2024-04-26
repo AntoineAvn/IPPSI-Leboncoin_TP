@@ -8,7 +8,7 @@ const annonceSchema = new Schema({
     isSell: { type: Boolean, default: false, require: true },
     seller: { type: Types.ObjectId, ref: 'User', require: true },
     buyer: { type: Types.ObjectId, ref: 'User' },
-    categories: { type: Array<Types.ObjectId>, ref: 'Categories' },
+    categories: { type: Array<Types.ObjectId>, ref: 'Categories', default: [] },
     createdAt: { type: Date, default: new Date(), require: true },
     updatedAt: { type: Date },
 })

@@ -7,7 +7,7 @@ export default interface IAnnonces extends Document{
     isSell: boolean,
     seller: Types.ObjectId,
     buyer?:  Types.ObjectId, 
-    categories?: Types.ObjectId[]
+    categories: Types.ObjectId[]
     createdAt: Date,
     updatedAt: Date
 }
