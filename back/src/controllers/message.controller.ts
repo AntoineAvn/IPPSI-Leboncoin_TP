@@ -1,6 +1,5 @@
 import { WebSocket } from 'ws';
 
-
 export default class MessageController {
 
     static async handleWebSocket(ws: WebSocket) {
@@ -13,5 +12,5 @@ export default class MessageController {
             console.log('WebSocket connection closed');
         });
     }
-    
+
 }
