@@ -3,6 +3,7 @@ import getErrorMessage from "../utils/getErrorMessage";
 import Annonces from "../models/annonces/annonce.schema";
 import IAnnonces from "../models/annonces/annonce.interface";
 import User from "../models/users/user.schema";
+import IUser from "../models/users/user.interface";
 
 export default class AnnonceController {
 
@@ -77,9 +78,12 @@ export default class AnnonceController {
                 seller,
                 createdAt: new Date()
             });
-            const user = await User.findById(userId)
-            user?.annonces.push(newAnnounce.id)
+            // On sait que le user ne peut pas etre null puisque le middleware
+            // retourne  une erreur 401 s'il ne trouve pas de user.
+            const user = await User.findById(userId) as IUser
+            user.annonces.push(newAnnounce.id)
             const savedAnnounce = await newAnnounce.save();
+            await user.save()
             res.status(201).json({ message: "Announcement created", value: { announce: savedAnnounce } });
         } catch(error: unknown) {
             res.status(400).json({ message: `Failed to create the announcement: ${getErrorMessage(error)}` });
