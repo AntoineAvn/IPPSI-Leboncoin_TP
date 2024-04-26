@@ -280,11 +280,6 @@ function Account() {
                 placeholder="Description"
                 onChange={(e) => setNewAnnounce({ ...newAnnounce, description: e.target.value })}
               />
-              {/* <input
-              
-                value={newAnnounce.category}
-                onChange={(e) => setNewCategory({ ...newAnnounce, category: e.target.value })}
-              /> */}
             <input
               type="number"
               value={newAnnounce.price}
@@ -359,6 +354,7 @@ function Account() {
                 ) : (
                   <div>
                     <h3>{announce.title}</h3>
+                    <p>{announce.categories.map((category) => category.title).join(', ')}</p>
                     <p>{announce.description}</p>
                     <p>{announce.price} €</p>
                     <p>Vendu: {announce.isSell ? 'Oui' : 'Non'}</p>
