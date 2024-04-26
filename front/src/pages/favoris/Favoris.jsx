@@ -75,7 +75,7 @@ function Favoris() {
         ) : (
             favoriteAnnounces.map((announce) => (
                 <div key={announce._id} className="favorite-announce-item">
-                    <Link to={`/announce/${announce._id}`}>
+                    <Link className='link-card' to={`/announce/${announce._id}`}>
                         <h2>{announce.title}</h2>
                         <p>{announce.description}</p>
                         <p>Prix : {announce.price} €</p>

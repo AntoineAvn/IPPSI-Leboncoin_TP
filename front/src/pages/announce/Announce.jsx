@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'; // Pour accéder au paramètre d'URL
 import ErrorComponent from '../../components/error/ErrorComponent';
-// import './Announce.css';
+import './Announce.css';
 
 function Announce() {
   const { id } = useParams(); // Récupère l'identifiant de l'URL
@@ -42,18 +42,20 @@ function Announce() {
   // }
 
   return (
-    <div className="announce-detail">
-    {error ? <ErrorComponent errorMessage={error} /> : 
-      <>
-      <h1>{announce.title}</h1>
-      <p>Catégorie : {announce.categories.map((category) => category.title).join(', ')}</p>
-      <p>Description : {announce.description}</p>
-      <p>Prix : {announce.price} €</p>
-      <p>{announce.isSell ? 'Vendu' : 'Disponible'}</p>
-      <p>Date de création : {new Date(announce.createdAt).toLocaleDateString()}</p>
-      {/* Ajoutez d'autres détails ici */}
-      </>
-    }
+    <div className='announce-page'>
+      <div className="announce-detail">
+      {error ? <ErrorComponent errorMessage={error} /> : 
+        <>
+        <h1>{announce.title}</h1>
+        <p>Catégorie : {announce.categories.map((category) => category.title).join(', ')}</p>
+        <p>Description : {announce.description}</p>
+        <p>Prix : {announce.price} €</p>
+        <p>{announce.isSell ? 'Vendu' : 'Disponible'}</p>
+        <p>Date de création : {new Date(announce.createdAt).toLocaleDateString()}</p>
+        {/* Ajoutez d'autres détails ici */}
+        </>
+      }
+      </div>
     </div>
   );
 }
