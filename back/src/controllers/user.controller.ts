@@ -111,6 +111,9 @@ export default class UserController {
 
         try {
             if(!right){
+                if (Object.keys(body).includes("isAdmin")){
+                    return res.status(403).json({message: "Huh?"})
+                }
                 await UserController.updateUserFields(userId, body, res)
             }
             else{
