@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Favoris.css';
 import ErrorComponent from '../../components/error/ErrorComponent';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as heartRegular, faHeart as heartSolid } from '@fortawesome/free-regular-svg-icons';
 
 function Favoris() {
   const [favoriteAnnounces, setFavoriteAnnounces] = useState([]);
+  // const [announces, setAnnounces] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const userId = localStorage.getItem('userId');
@@ -39,6 +42,24 @@ function Favoris() {
       });
   }, [userId]); 
 
+  const toggleFavorite = (id) => {
+    const favorites = JSON.parse(localStorage.getItem(`favorites_${userId}`)) || [];
+    const isFavorite = favorites.includes(id);
+    const updatedFavorites = isFavorite 
+      ? favorites.filter(favId => favId !== id) 
+      : [...favorites, id];
+
+    // Mettre à jour le localStorage
+    localStorage.setItem(`favorites_${userId}`, JSON.stringify(updatedFavorites));
+
+    // Mettre à jour l'état des favoris
+    const updatedFavoritesData = favoriteAnnounces.map(announce => 
+      announce._id === id ? { ...announce, isFavorite: !announce.isFavorite } : announce
+    );
+
+    setFavoriteAnnounces(isFavorite ? updatedFavoritesData.filter(a => a._id !== id) : updatedFavoritesData);
+  };
+
   if (isLoading) {
     return <div>Chargement des annonces favorites...</div>;
   }
@@ -61,6 +82,9 @@ function Favoris() {
                         <p>{announce.isSell ? 'Vendu' : 'Disponible'}</p>
                         <p>Date de création : {new Date(announce.createdAt).toLocaleDateString()}</p>
                     </Link>
+                    <button onClick={() => toggleFavorite(announce._id)}>
+                      <FontAwesomeIcon icon={announce.isFavorite ? heartSolid : heartRegular} style={{ color: 'red' }} />
+                    </button>
                 </div>
             ))
         )}

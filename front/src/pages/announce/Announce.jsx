@@ -46,6 +46,7 @@ function Announce() {
     {error ? <ErrorComponent errorMessage={error} /> : 
       <>
       <h1>{announce.title}</h1>
+      <p>Catégorie : {announce.categories.map((category) => category.title).join(', ')}</p>
       <p>Description : {announce.description}</p>
       <p>Prix : {announce.price} €</p>
       <p>{announce.isSell ? 'Vendu' : 'Disponible'}</p>
