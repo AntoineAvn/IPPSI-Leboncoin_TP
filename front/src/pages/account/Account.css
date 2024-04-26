@@ -13,3 +13,82 @@
   justify-content: center;
   /* height: 100vh; */
 }
+
+.create-announce {
+  margin: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* height: 100vh; */
+}
+
+.create-announce form input{
+  width: 20%;
+  margin: 1em;
+  padding: 1em;
+  border-radius: 5px;
+  border: 1px solid grey;
+}
+
+.create-announce form textarea{
+  width: 20%;
+  margin: 1em;
+  padding: 1em;
+  border-radius: 5px;
+  border: 1px solid grey;
+}
+
+.my-announces {
+  /* border: 1px solid yellow; */
+  width: 90%;
+  margin: 2em;
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+  align-items: center;
+}
+
+.my-announces ul{
+  width: 100%;
+  margin: 0;
+  list-style: none;
+  padding: 0;
+}
+
+.my-announces li{
+  border-bottom: 1px solid grey;
+}
+
+
+.my-announces li div{
+  /* border: 1px solid red; */
+  /* border-bottom: 1px solid grey; */
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+}
+
+.my-announces li div input{
+  margin: 1em;
+  padding: 1em;
+  border-radius: 5px;
+  /* border: 1px solid grey; */
+  height: fit-content;
+
+}
+
+.my-announces li div button{
+  margin: 1em;
+  padding: 5px 10px 5px 10px;
+  border-radius: 5px;
+  height: fit-content;
+  /* border: 1px solid grey; */
+}
+
+.my-announces li div button:hover{
+  border: 1px solid #535bf2;
+}

@@ -66,7 +66,7 @@ const RegisterPage = () => {
         <button type="submit">S&apos;inscrire</button>
       </form>
         {/* Afficher le composant d'erreur s'il y a une erreur */}
-        <ErrorComponent errorMessage={error} />
+        {error && <ErrorComponent errorMessage={error} /> }
       <p>Vous avez déjà un compte ? </p>
       <Link to="/">Connectez vous !</Link> {/* Retour a la page de Login */}
     </div>
