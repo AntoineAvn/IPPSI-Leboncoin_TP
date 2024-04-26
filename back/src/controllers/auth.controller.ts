@@ -22,7 +22,7 @@ export default class AuthController{
             const token = jwt.sign({userId: user.id}, process.env.SECRET_KEY_JWT!, {
                 expiresIn: "4h",
             })
-            res.status(200).json({message: "Authentification sucessful", value: {token} })
+            res.status(200).json({message: "Authentification sucessful", value: {token: token, userId: user.id} })
         } catch(error : unknown){
             res.status(500).json({message: `Error: ${getErrorMessage(error)}`})
         }
@@ -51,7 +51,7 @@ export default class AuthController{
             const token = jwt.sign({userId: user.id}, process.env.SECRET_KEY_JWT!, {
                 expiresIn: '4h'
             })
-            res.status(201).json({message: "The account has been created.", value: { token }})
+            res.status(201).json({message: "The account has been created.", value: { token, userId: user.id }})
         
         } catch (error: unknown) {
             res.status(500).json({message: `Error: ${getErrorMessage(error)}`})
