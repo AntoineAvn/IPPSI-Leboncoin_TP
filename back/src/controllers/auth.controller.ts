@@ -17,7 +17,7 @@ export default class AuthController{
             }   
             const matchPassword = SecurityService.comparePasword(password, user.password)
             if(!matchPassword){
-                return res.status(401).json({message: "Authentification failled, wrong password"})
+                return res.status(401).json({message: "Authentification failled, email or password incorrect"})
             }
             const token = jwt.sign({userId: user.id}, process.env.SECRET_KEY_JWT!, {
                 expiresIn: "4h",
