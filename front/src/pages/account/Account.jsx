@@ -35,6 +35,7 @@ function Account() {
       })
       .then((data) => {
         setUserData(data.value.user);
+        console.log(data.value.user);
         setAnnounces(data.value.user.annonces); // Stocke les annonces de l'utilisateur
         setIsLoading(false);
       })

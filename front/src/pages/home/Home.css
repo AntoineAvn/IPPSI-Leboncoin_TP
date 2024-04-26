@@ -34,10 +34,16 @@
   }
 
   .announce-item {
+    width: 300px;
     margin: 20px;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     color: white;
+  }
+
+  .link-item {
+    color: white;
+    text-decoration: none;
   }
   
