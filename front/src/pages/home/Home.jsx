@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as heartRegular, faHeart as heartSolid } from '@fortawesome/free-regular-svg-icons';
 
 function Home() {
   const [announces, setAnnounces] = useState([]);
@@ -40,6 +42,15 @@ function Home() {
     announce.title.toLowerCase().includes(searchValue.toLowerCase()) // Filtre par titre
   ); // Filtre la liste des annonces en fonction de la recherche
 
+  const toggleFavorite = (id) => {
+    // Mettez à jour l'état des favoris pour l'annonce avec l'identifiant 'id'
+    setAnnounces(prevAnnounces => 
+      prevAnnounces.map(announce => 
+        announce._id === id ? {...announce, isFavorite: !announce.isFavorite} : announce
+      )
+    );
+  };
+
   if (isLoading) {
     return <div>Chargement des annonces...</div>;
   }
@@ -66,17 +77,18 @@ function Home() {
           <p>Aucune annonce trouvée</p> // Afficher un message si aucune annonce
         ) : (
           filteredAnnounces.map((announce) => (
-            <Link
-              key={announce._id}
-              to={`/announce/${announce._id}`}
-              className="announce-item"
-            >
-              <h2>{announce.title}</h2>
-              <p>{announce.description}</p>
-              <p>Prix : {announce.price} €</p>
-              <p>{announce.isSell ? 'Vendu' : 'Disponible'}</p>
-              <p>Date de création : {new Date(announce.createdAt).toLocaleDateString()}</p>
-            </Link>
+            <div key={announce._id} className="announce-item">
+              <Link to={`/announce/${announce._id}`}>
+                <h2>{announce.title}</h2>
+                <p>{announce.description}</p>
+                <p>Prix : {announce.price} €</p>
+                <p>{announce.isSell ? 'Vendu' : 'Disponible'}</p>
+                <p>Date de création : {new Date(announce.createdAt).toLocaleDateString()}</p>
+              </Link>
+              <button onClick={() => toggleFavorite(announce._id)}>
+                <FontAwesomeIcon icon={announce.isFavorite ? heartSolid : heartRegular} style={{ color: announce.isFavorite ? 'red' : 'black' }} />
+              </button>
+            </div>
           ))
         )}
       </div>
