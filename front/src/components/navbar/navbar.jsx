@@ -20,6 +20,7 @@ function Navbar() {
         <>
           <Link to="/home">Annonces</Link>
           <Link to="/account">Mon compte</Link>
+          <Link to="/favoris">Mes favoris</Link>
           <Logout />
         </>
       )}
