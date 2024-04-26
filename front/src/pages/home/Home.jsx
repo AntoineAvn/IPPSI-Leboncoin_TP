@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as heartRegular, faHeart as heartSolid } from '@fortawesome/free-regular-svg-icons';
+import ErrorComponent from '../../components/error/ErrorComponent';
 
 function Home() {
   const [announces, setAnnounces] = useState([]);
@@ -55,13 +56,16 @@ function Home() {
     return <div>Chargement des annonces...</div>;
   }
 
-  if (error) {
-    return <div>{error}</div>;
-  }
+  // if (error) {
+  //   return <div>{error}</div>;
+  // }
 
   return (
     <div className="home-container">
       <h1>Bienvenue sur notre site d&apos;annonces !</h1>
+      
+      {error ? <ErrorComponent errorMessage={error} /> : 
+      <>
       <div className="search-bar">
         <input
           type="text"
@@ -71,6 +75,8 @@ function Home() {
         />
         <button onClick={() => console.log('Rechercher')}>Rechercher</button> {/* Bouton de recherche */}
       </div>
+
+      
 
       <div className="announces-list">
         {filteredAnnounces.length === 0 ? (
@@ -91,8 +97,12 @@ function Home() {
             </div>
           ))
         )}
+
       </div>
+      </>
+      }
     </div>
+
   );
 }
 
