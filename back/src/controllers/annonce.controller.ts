@@ -9,7 +9,7 @@ export default class AnnonceController {
 
     private static async updateAnnouncesFields(annonceId: string, updateFields: Partial<IAnnonces>, res: Response){
         try{
-            const annonce = await Annonces.findById(annonceId)
+            const annonce = await Annonces.findById(annonceId).populate('categories')
             if(!annonce){
                 return res.status(404).json({message: "Announce not found"})
             }
@@ -38,7 +38,7 @@ export default class AnnonceController {
 
     static async getAllAnnonce(_: Request, res: Response){
         try{
-            const annonces = await Annonces.find()
+            const annonces = await Annonces.find().populate('categories')
             if(!Annonces){
                 return res.status(404).json({message: "Found any announces"})
             }
@@ -51,7 +51,7 @@ export default class AnnonceController {
     static async getAnnonce(req: Request, res: Response){
         const {id:annonceId} = req.params
         try {
-            const annonce = await Annonces.findById(annonceId)
+            const annonce = await Annonces.findById(annonceId).populate('categories')
             if(!annonce){
                 return res.status(404).json({message: "Announce not found"})
             }
@@ -63,7 +63,7 @@ export default class AnnonceController {
 
     static async createAnnounce(req: Request, res: Response){
         
-        const { title, description, price } = req.body;
+        const { title, description, price, categories } = req.body;
         const { userId } = req as any;
         
         try {
@@ -76,6 +76,7 @@ export default class AnnonceController {
                 price,
                 isSell: false,
                 seller,
+                categories,
                 createdAt: new Date()
             });
             // On sait que le user ne peut pas etre null puisque le middleware
