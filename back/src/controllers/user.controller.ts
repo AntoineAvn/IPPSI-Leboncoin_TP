@@ -97,6 +97,7 @@ export default class UserController {
         } catch (error: unknown) {
             res.status(500).json({message: `Error: ${getErrorMessage(error)}`})
         }
+        
     }
 
     static async updateUser(req: Request, res: Response){
