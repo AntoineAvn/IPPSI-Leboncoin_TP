@@ -76,6 +76,32 @@ export default class UserController {
 
     }
 
+    static async getAnnouncesOfUser(req: Request, res: Response){
+
+        const { userId } = req  as any
+        const { id:idOfUser } = req.params
+
+        try {
+            
+            const user = await User.findById(userId)
+            if(user?.isAdmin && idOfUser !== ""){
+                const user = await User.findById(idOfUser)
+                const announcesOfUser = await user?.populate('annonces')
+                if(!announcesOfUser){
+                    return res.status(200).json({value:{annonces : []}})
+                }
+                return res.status(200).json({value:{annonces : announcesOfUser.annonces}})
+            }
+            if(!user){
+                return res.status(404).json({message: "User not found"})
+            }
+            res.status(200).json({value:{annonces : user.annonces}})
+        } catch (error: unknown) {
+            res.status(500).json({message: `Error: ${getErrorMessage(error)}`})
+        }
+
+    }
+
     static async updateUser(req: Request, res: Response){
 
         const { userId } = req as any
