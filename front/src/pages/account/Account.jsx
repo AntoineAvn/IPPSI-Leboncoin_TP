@@ -37,8 +37,6 @@ function Account() {
       })
       .then((data) => {
         setUserData(data.value.user);
-        // console.log(data.value.user);
-        // setAnnounces(data.value.user.annonces); // Stocke les annonces de l'utilisateur
         setIsLoading(false);
       })
       .catch((err) => {
@@ -84,6 +82,7 @@ function Account() {
       // ajoutez d'autres champs à mettre à jour
     };
 
+    // Envoi des données mises à jour
     fetch('http://localhost:3001/api/user', {
       method: 'PATCH',
       headers: {
@@ -224,10 +223,6 @@ function Account() {
     return <div>Chargement...</div>;
   }
 
-  // if (error) {
-  //   return <div>{error}</div>;
-  // }
-
   return (
     <div className='account-container'>
         <h1>Bienvenue sur votre espace personnel !</h1>
@@ -252,22 +247,22 @@ function Account() {
                 onChange={(e) => setUserData({ ...userData, email: e.target.value })}
               />
             </label>
-            <button onClick={handleUpdate}>Enregistrer</button> {/* Bouton pour sauvegarder */}
-            <button onClick={() => setEditMode(false)}>Annuler</button> {/* Pour annuler */}
+            <button onClick={handleUpdate}>Enregistrer</button> 
+            <button onClick={() => setEditMode(false)}>Annuler</button>
           </div>
         ) : (
           <div>
             <p>Nom d&apos;utilisateur : {userData.username}</p>
             <p>Email : {userData.email}</p>
-            <button onClick={() => setEditMode(true)}>Modifier</button> {/* Pour passer en mode édition */}
-            <button onClick={handleDeleteAccount}>Supprimer le compte</button> {/* Bouton de suppression */}
+            <button onClick={() => setEditMode(true)}>Modifier</button> 
+            <button onClick={handleDeleteAccount}>Supprimer le compte</button>
           </div>
         )}
           {error && <ErrorComponent message={error} />}
       </div>
       <div className="create-announce">
         <h2>Créer une nouvelle annonce</h2>
-        <form onSubmit={handleNewAnnounce}> {/* Formulaire pour créer une nouvelle annonce */}
+        <form onSubmit={handleNewAnnounce}> 
             <input
               type="text"
               value={newAnnounce.title}
@@ -292,7 +287,7 @@ function Account() {
               checked={newAnnounce.isSell}
               onChange={() => setNewAnnounce({ ...newAnnounce, isSell: false })}
             />
-          <button type="submit">Créer l&apos;annonce</button> {/* Bouton de soumission */}
+          <button type="submit">Créer l&apos;annonce</button>
         </form>
       </div>
       <div className="my-announces">
@@ -360,8 +355,8 @@ function Account() {
                     <p>Vendu: {announce.isSell ? 'Oui' : 'Non'}</p>
                     <p>{new Date(announce.createdAt).toLocaleDateString()}</p>
                     <div>
-                      <button onClick={() => handleEdit(announce)}>Modifier</button> {/* Bouton pour modifier */}
-                      <button onClick={() => handleDelete(announce)}>Supprimer</button> {/* Bouton pour modifier */}
+                      <button onClick={() => handleEdit(announce)}>Modifier</button>
+                      <button onClick={() => handleDelete(announce)}>Supprimer</button>
                     </div>
                   </div>
                 )}

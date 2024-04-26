@@ -7,7 +7,6 @@ import { faHeart as heartRegular, faHeart as heartSolid } from '@fortawesome/fre
 
 function Favoris() {
   const [favoriteAnnounces, setFavoriteAnnounces] = useState([]);
-  // const [announces, setAnnounces] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const userId = localStorage.getItem('userId');

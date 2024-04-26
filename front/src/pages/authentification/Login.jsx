@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import './Login.css'; // Importer le fichier CSS
+import './Login.css';
 import ErrorComponent from '../../components/error/ErrorComponent';
 import { AuthContext } from '../../utils/AuthContext';
 import { Navigate } from 'react-router-dom';
@@ -53,7 +53,7 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="login-container"> {/* Ajouter une classe pour appliquer les styles */}
+    <div className="login-container">
       <h2>Connexion</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -68,11 +68,11 @@ const LoginPage = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)} 
         />
-        <button type="submit">Se connecter</button> {/* Bouton de connexion */}
+        <button type="submit">Se connecter</button>
       </form>
       {error &&<ErrorComponent errorMessage={error} />}
       <p>Vous n&apos;avez pas de compte ? </p>
-      <a href="/register">Inscrivez-vous</a> {/* Lien vers la page d'inscription */}
+      <a href="/register">Inscrivez-vous</a>
     </div>
   );
 };

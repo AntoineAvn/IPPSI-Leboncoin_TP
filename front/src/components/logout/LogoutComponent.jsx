@@ -1,9 +1,6 @@
-// import React from 'react';
-// import { useHistory } from 'react-router-dom';
 import './LogoutComponent.css';
 
 const Logout = () => {
-    // const history = useHistory();
 
     const handleLogout = () => {
         // Erase authToken form localStorage
