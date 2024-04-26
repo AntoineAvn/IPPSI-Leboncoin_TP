@@ -51,7 +51,7 @@ export default class AnnonceController {
     static async getAnnonce(req: Request, res: Response){
         const {id:annonceId} = req.params
         try {
-            const annonce = await Annonces.findById(annonceId).populate('Categories')
+            const annonce = await Annonces.findById(annonceId).populate('categories')
             if(!annonce){
                 return res.status(404).json({message: "Announce not found"})
             }
