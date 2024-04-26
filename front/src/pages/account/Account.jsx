@@ -280,6 +280,11 @@ function Account() {
                 placeholder="Description"
                 onChange={(e) => setNewAnnounce({ ...newAnnounce, description: e.target.value })}
               />
+              {/* <input
+              
+                value={newAnnounce.category}
+                onChange={(e) => setNewCategory({ ...newAnnounce, category: e.target.value })}
+              /> */}
             <input
               type="number"
               value={newAnnounce.price}

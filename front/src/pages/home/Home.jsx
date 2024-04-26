@@ -44,7 +44,7 @@ function Home() {
         console.error(err);
         setIsLoading(false);
       });
-  }, []); // L'effet se déclenche une seule fois lors du montage
+  }, [userId]); // L'effet se déclenche une seule fois lors du montage
 
   const filteredAnnounces = announces.filter((announce) =>
     announce.title.toLowerCase().includes(searchValue.toLowerCase()) // Filtre par titre
@@ -98,17 +98,19 @@ function Home() {
           <p>Aucune annonce trouvée</p> // Afficher un message si aucune annonce
         ) : (
           filteredAnnounces.map((announce) => (
+            // console.log(announce),
             <div key={announce._id} className="announce-item">
               <Link className="link-item" to={`/announce/${announce._id}`}>
                 <h2>{announce.title}</h2>
+                <p>{announce.categories.map((category) => category.title).join(', ')}</p>
                 <p>{announce.description}</p>
                 <p>Prix : {announce.price} €</p>
                 <p>{announce.isSell ? 'Vendu' : 'Disponible'}</p>
                 <p>Date de création : {new Date(announce.createdAt).toLocaleDateString()}</p>
               </Link>
               <button onClick={() => toggleFavorite(announce._id)}>
-                  <FontAwesomeIcon icon={announce.isFavorite ? heartSolid : heartRegular} style={{ color: announce.isFavorite ? 'red' : 'white' }} />
-                </button>
+                <FontAwesomeIcon icon={announce.isFavorite ? heartSolid : heartRegular} style={{ color: announce.isFavorite ? 'red' : 'white' }} />
+              </button>
             </div>
           ))
         )}
