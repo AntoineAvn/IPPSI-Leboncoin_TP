@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; // Pour accéder au paramètre d'URL
+import { useParams } from 'react-router-dom';
 import ErrorComponent from '../../components/error/ErrorComponent';
 import './Announce.css';
 
@@ -37,10 +37,6 @@ function Announce() {
     return <div>Chargement...</div>;
   }
 
-  // if (error) {
-  //   return <div>{error}</div>;
-  // }
-
   return (
     <div className='announce-page'>
       <div className="announce-detail">
@@ -52,7 +48,6 @@ function Announce() {
         <p>Prix : {announce.price} €</p>
         <p>{announce.isSell ? 'Vendu' : 'Disponible'}</p>
         <p>Date de création : {new Date(announce.createdAt).toLocaleDateString()}</p>
-        {/* Ajoutez d'autres détails ici */}
         </>
       }
       </div>

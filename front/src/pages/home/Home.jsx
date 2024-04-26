@@ -9,7 +9,7 @@ function Home() {
   const [announces, setAnnounces] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchValue, setSearchValue] = useState(''); // État pour stocker la recherche
+  const [searchValue, setSearchValue] = useState('');
   const userId = localStorage.getItem('userId');
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function Home() {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`, // Inclure le token d'authentification
+        'Authorization': `Bearer ${token}`,
       },
     })
       .then((response) => {
@@ -71,10 +71,6 @@ function Home() {
     return <div>Chargement des annonces...</div>;
   }
 
-  // if (error) {
-  //   return <div>{error}</div>;
-  // }
-
   return (
     <div className="home-container">
       <h1>Bienvenue sur notre site d&apos;annonces !</h1>
@@ -85,20 +81,19 @@ function Home() {
         <input
           type="text"
           placeholder="Rechercher une annonce..."
-          value={searchValue} // Lier l'état de recherche à l'input
-          onChange={(e) => setSearchValue(e.target.value)} // Mettre à jour lors du changement
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)} 
         />
-        <button onClick={() => console.log('Rechercher')}>Rechercher</button> {/* Bouton de recherche */}
+        <button onClick={() => console.log('Rechercher')}>Rechercher</button>
       </div>
 
       
 
       <div className="announces-list">
         {filteredAnnounces.length === 0 ? (
-          <p>Aucune annonce trouvée</p> // Afficher un message si aucune annonce
+          <p>Aucune annonce trouvée</p>
         ) : (
           filteredAnnounces.map((announce) => (
-            // console.log(announce),
             <div key={announce._id} className="announce-item">
               <Link className="link-item" to={`/announce/${announce._id}`}>
                 <h2>{announce.title}</h2>

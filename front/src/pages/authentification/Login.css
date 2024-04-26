@@ -9,7 +9,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-align: center; /* Ajout du centrage horizontal */
+    text-align: center;
   }
   
   .login-container h2 {
@@ -18,12 +18,12 @@
   }
   
   .login-container input {
-    width: calc(100% - 20px); /* Calcul de la largeur avec marges */
+    width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    text-align: center; /* Centrage horizontal du texte */
+    text-align: center;
   }
   
   .login-container button {

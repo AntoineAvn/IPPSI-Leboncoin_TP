@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom'; // Importez Link depuis react-router-dom
+import { Link } from 'react-router-dom';
 import './Login.css'; 
 import ErrorComponent from '../../components/error/ErrorComponent';
 
@@ -34,7 +34,6 @@ const RegisterPage = () => {
         window.location.replace('/');
       })
       .catch((err) => {
-        // Gérer les erreurs ou les statuts autres que 201
         setError('Erreur lors de l\'inscription'); 
         console.error(err);
       });
@@ -42,7 +41,7 @@ const RegisterPage = () => {
   
 
   return (
-    <div className="login-container"> {/* Appliquez la classe commune */}
+    <div className="login-container">
       <h2>Inscription</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -65,10 +64,9 @@ const RegisterPage = () => {
         />
         <button type="submit">S&apos;inscrire</button>
       </form>
-        {/* Afficher le composant d'erreur s'il y a une erreur */}
         {error && <ErrorComponent errorMessage={error} /> }
       <p>Vous avez déjà un compte ? </p>
-      <Link to="/">Connectez vous !</Link> {/* Retour a la page de Login */}
+      <Link to="/">Connectez vous !</Link>
     </div>
   );
 };
