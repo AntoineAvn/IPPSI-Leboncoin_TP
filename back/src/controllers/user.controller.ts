@@ -89,10 +89,16 @@ export default class UserController {
             if(user.isAdmin && idOfUser){
                 const userToCheck = await User.findById(idOfUser)
                 if(!userToCheck) return res.status(404).json({message: "User not found"})
-                const annonces = await userToCheck.populate('annonces') ?? []
+                const annonces = await userToCheck.populate({
+                    path: 'annonces',
+                    populate: { path: 'categories' }
+                }) ?? []
                 return res.status(200).json({value:{annonces : annonces.annonces}})
             }
-            const annonces = await user.populate('annonces') ?? []
+            const annonces = await user.populate({
+                path: 'annonces',
+                populate: { path: 'categories' }
+            }) ?? []
             res.status(200).json({value:{annonces : annonces.annonces}})
         } catch (error: unknown) {
             res.status(500).json({message: `Error: ${getErrorMessage(error)}`})
