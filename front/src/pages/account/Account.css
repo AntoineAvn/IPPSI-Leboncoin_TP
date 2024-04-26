@@ -13,11 +13,35 @@
 }
 
 .create-announce {
+  width: 100%;
   margin: 2em;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+select{
+  width: 20%;
+  margin: 1em;
+  padding: 1em;
+  border-radius: 5px;
+  border: 1px solid grey;
+
+}
+
+.create-announce form{
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-announce form button{
+  margin: 1em;
+  padding: 5px 10px 5px 10px;
+  border-radius: 5px;
+  height: fit-content;
 }
 
 .create-announce form input{
@@ -59,7 +83,7 @@
 
 .my-announces li div{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   justify-items: center;
   align-items: center;
 }
