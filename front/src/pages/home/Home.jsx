@@ -10,9 +10,11 @@ function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchValue, setSearchValue] = useState(''); // État pour stocker la recherche
+  const userId = localStorage.getItem('userId');
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
+    const favorites = JSON.parse(localStorage.getItem(`favorites_${userId}`)) || [];
 
     fetch('http://localhost:3001/api/announces', {
       method: 'GET',
@@ -29,7 +31,12 @@ function Home() {
         }
       })
       .then((data) => {
-        setAnnounces(data.value.annonces); // Stocke les annonces
+        // Mettre à jour les annonces avec l'état des favoris
+        const updatedAnnounces = data.value.annonces.map(announce => ({
+          ...announce,
+          isFavorite: favorites.includes(announce._id),
+        }));
+        setAnnounces(updatedAnnounces); // Stocke les annonces
         setIsLoading(false);
       })
       .catch((err) => {
@@ -44,12 +51,20 @@ function Home() {
   ); // Filtre la liste des annonces en fonction de la recherche
 
   const toggleFavorite = (id) => {
-    // Mettez à jour l'état des favoris pour l'annonce avec l'identifiant 'id'
-    setAnnounces(prevAnnounces => 
-      prevAnnounces.map(announce => 
-        announce._id === id ? {...announce, isFavorite: !announce.isFavorite} : announce
-      )
+    // Mettre à jour l'état des favoris
+    const updatedAnnounces = announces.map(announce => 
+      announce._id === id ? { ...announce, isFavorite: !announce.isFavorite } : announce
     );
+    setAnnounces(updatedAnnounces);
+
+    // Mettre à jour le localStorage
+    const favorites = JSON.parse(localStorage.getItem(`favorites_${userId}`)) || [];
+    const isFavorite = favorites.includes(id);
+    const updatedFavorites = isFavorite 
+      ? favorites.filter(favId => favId !== id) 
+      : [...favorites, id];
+
+    localStorage.setItem(`favorites_${userId}`, JSON.stringify(updatedFavorites));
   };
 
   if (isLoading) {
@@ -92,8 +107,8 @@ function Home() {
                 <p>Date de création : {new Date(announce.createdAt).toLocaleDateString()}</p>
               </Link>
               <button onClick={() => toggleFavorite(announce._id)}>
-                <FontAwesomeIcon icon={announce.isFavorite ? heartSolid : heartRegular} style={{ color: announce.isFavorite ? 'red' : 'black' }} />
-              </button>
+                  <FontAwesomeIcon icon={announce.isFavorite ? heartSolid : heartRegular} style={{ color: announce.isFavorite ? 'red' : 'white' }} />
+                </button>
             </div>
           ))
         )}

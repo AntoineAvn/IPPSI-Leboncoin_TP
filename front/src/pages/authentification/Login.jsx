@@ -36,6 +36,7 @@ const LoginPage = () => {
         console.log(data);
 
         localStorage.setItem('authToken', data.value.token);
+        localStorage.setItem('userId', data.value.userId);
         setIsAuthenticated(true); // Met à jour le contexte d'authentification
         setRedirectToHome(true); 
       })
