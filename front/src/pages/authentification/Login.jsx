@@ -69,7 +69,7 @@ const LoginPage = () => {
         />
         <button type="submit">Se connecter</button> {/* Bouton de connexion */}
       </form>
-      <ErrorComponent errorMessage={error} /> {/* Afficher l'erreur */}
+      {error &&<ErrorComponent errorMessage={error} />}
       <p>Vous n&apos;avez pas de compte ? </p>
       <a href="/register">Inscrivez-vous</a> {/* Lien vers la page d'inscription */}
     </div>
