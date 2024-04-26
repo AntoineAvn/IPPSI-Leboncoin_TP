@@ -14,7 +14,31 @@ function Account() {
     description: '',
     price: '',
     isSell: true,
+    categories: [],
   });
+  const [categories, setCategories] = useState([]);
+
+   // Récupérer les catégories
+   useEffect(() => {
+    const token = localStorage.getItem('authToken');
+
+    fetch('http://localhost:3001/api/categories', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`, // Inclure le token d'authentification
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setCategories(data.value.categories); // Stocke les catégories
+      })
+      .catch((err) => {
+        setError('Impossible de récupérer les catégories');
+        console.error(err);
+      });
+  }, []);
 
 
   // Récupérer les données utilisateur
@@ -139,13 +163,19 @@ function Account() {
 
     const token = localStorage.getItem('authToken');
 
+    // Préparer l'objet d'annonce avec les catégories sélectionnées
+    const announceToCreate = {
+      ...newAnnounce,
+      categories: [newAnnounce.category], // Utiliser la catégorie sélectionnée
+    };
+
     fetch('http://localhost:3001/api/announce', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`, // Inclure le token d'authentification
       },
-      body: JSON.stringify(newAnnounce), // Envoyer les données de la nouvelle annonce
+      body: JSON.stringify(announceToCreate), // Envoyer les données de la nouvelle annonce
     })
       .then((response) => {
         if (response.status === 201) {
@@ -281,13 +311,23 @@ function Account() {
               placeholder="Prix"
               onChange={(e) => setNewAnnounce({ ...newAnnounce, price: e.target.value })}
             />
+            <select
+              value={newAnnounce.category}
+              onChange={(e) => setNewAnnounce({ ...newAnnounce, category: e.target.value })}
+            >
+              {categories.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.title}
+                </option>
+              ))}
+            </select>
             <input
               type="checkbox"
               hidden
               checked={newAnnounce.isSell}
               onChange={() => setNewAnnounce({ ...newAnnounce, isSell: false })}
             />
-          <button type="submit">Créer l&apos;annonce</button>
+          <button type="submit">Créer</button>
         </form>
       </div>
       <div className="my-announces">
