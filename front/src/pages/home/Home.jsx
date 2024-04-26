@@ -78,7 +78,7 @@ function Home() {
         ) : (
           filteredAnnounces.map((announce) => (
             <div key={announce._id} className="announce-item">
-              <Link to={`/announce/${announce._id}`}>
+              <Link className="link-item" to={`/announce/${announce._id}`}>
                 <h2>{announce.title}</h2>
                 <p>{announce.description}</p>
                 <p>Prix : {announce.price} €</p>
