@@ -12,7 +12,7 @@ export default class UserController {
             const user = await User.findById(userId);
         
             if (!user) {
-              return null;
+                return res.status(404).json({message: "User not found"})
             }
             for (const key of Object.keys(updateFields)) {
                 
@@ -37,14 +37,14 @@ export default class UserController {
         
             const updatedUser = await user.save();
         
-            return res.status(200).json({ message: "User updated",value: {updatedUser}});
+            res.status(200).json({ message: "User updated",value: {updatedUser}});
           } catch (error: unknown) {
             res.status(400).json({ message: `Failed to update the user: ${getErrorMessage(error)}`});
           }
 
     }
 
-    static async getAllUser(req: Request, res: Response){
+    static async getAllUser(_: Request, res: Response){
 
         try {
             const users = await User.find()
@@ -87,10 +87,10 @@ export default class UserController {
 
         try {
             if(!right){
-                await this.updateUserFields(userId, body, res)
+                await UserController.updateUserFields(userId, body, res)
             }
             else{
-                await this.updateUserFields(id, body, res)
+                await UserController.updateUserFields(id, body, res)
             }
         } catch(error: unknown){
             res.status(500).json({message: `Error: ${getErrorMessage(error)}`})

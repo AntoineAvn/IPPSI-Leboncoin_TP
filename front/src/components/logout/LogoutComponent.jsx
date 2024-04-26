@@ -1,5 +1,6 @@
 // import React from 'react';
 // import { useHistory } from 'react-router-dom';
+import './LogoutComponent.css';
 
 const Logout = () => {
     // const history = useHistory();
@@ -13,7 +14,7 @@ const Logout = () => {
     };
 
     return (
-        <button onClick={handleLogout}>Se déconnecter</button>
+        <button id='bnt-logout' onClick={handleLogout}>Se déconnecter</button>
     );
 };
 
