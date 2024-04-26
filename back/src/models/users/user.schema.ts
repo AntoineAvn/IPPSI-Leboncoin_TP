@@ -11,7 +11,7 @@ const userSchema = new Schema({
     isAdmin: { type: Boolean, default: false, require: true }
 })
 
-// Pour delete en cascade
+// Pour delete en cascade les annonces supprimer
 userSchema.pre('findOneAndUpdate', async function(next) {
     const update : any = this.getUpdate();
     const annonceIdToDelete = update?.$pull?.annonces;

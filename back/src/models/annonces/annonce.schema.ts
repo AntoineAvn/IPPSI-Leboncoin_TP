@@ -13,7 +13,7 @@ const annonceSchema = new Schema({
     updatedAt: { type: Date },
 })
 
-// Delete en cascade les categories
+// Delete en cascade les categories dans annonces
 annonceSchema.pre('findOneAndUpdate', async function(next) {
     const update: any = this.getUpdate();
     const categoryIdToDelete = update?.$pull?.categories;
